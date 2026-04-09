@@ -1,4 +1,5 @@
 ---
+name: rev-symbol
 description: Restore function symbols by analyzing code patterns, strings, constants, and cross-references
 ---
 

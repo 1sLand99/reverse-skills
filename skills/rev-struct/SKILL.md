@@ -1,4 +1,5 @@
 ---
+name: rev-struct
 description: Reconstruct data structures by analyzing memory access patterns across functions
 ---
 

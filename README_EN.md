@@ -1,15 +1,15 @@
 English | [中文](README.md)
 
-# Reverse Engineering Skills for Claude Code
+# Reverse Engineering Skills
 
-A Claude Code plugin marketplace providing reverse engineering skills.
+Reverse engineering analysis skills, supporting 40+ AI coding agents.
 
-**Designed to work with [IDA-NO-MCP](https://github.com/P4nda0s/IDA-NO-MCP)** - Export IDA decompilation results, then analyze with Claude Code.
+**Designed to work with [IDA-NO-MCP](https://github.com/P4nda0s/IDA-NO-MCP)** - Export IDA decompilation results, then analyze with your AI coding agent.
 
 ## Workflow
 
 1. **Export from IDA** using [IDA-NO-MCP](https://github.com/P4nda0s/IDA-NO-MCP) plugin (`Ctrl-Shift-E`)
-2. **Open exported directory** with Claude Code
+2. **Open exported directory** with your AI coding agent
 3. **Use skills** to analyze symbols and structures
 
 ### Exported Directory Structure (by IDA-NO-MCP)
@@ -48,107 +48,75 @@ int __fastcall sub_401000(int a1, int a2)
 
 | Skill | Description |
 |-------|-------------|
-| `/reverse-engineering:rev-symbol` | Analyze function symbols from exports/imports or decompiled code |
-| `/reverse-engineering:rev-struct` | Reconstruct data structures from decompiled functions |
+| `rev-symbol` | Analyze function symbols from exports/imports or decompiled code |
+| `rev-struct` | Reconstruct data structures from decompiled functions |
+| `rev-frida` | Generate Frida hook scripts using modern Frida API |
 
 ## Installation
 
-### Claude
-1. Add the Marketplace
+```bash
+npx skills add P4nda0s/reverse-skills
+```
+
+### Options
 
 ```bash
-# From GitHub
-/plugin marketplace add pandaos/reverse-skills
+# List available skills
+npx skills add P4nda0s/reverse-skills --list
 
-# From local path (for development)
-/plugin marketplace add /path/to/reverse-skills
+# Install globally (available across all projects)
+npx skills add P4nda0s/reverse-skills -g
+
+# Install to specific agents
+npx skills add P4nda0s/reverse-skills -a claude-code
+npx skills add P4nda0s/reverse-skills -a cursor
+
+# Install a specific skill
+npx skills add P4nda0s/reverse-skills --skill rev-symbol
+
+# Install to all agents
+npx skills add P4nda0s/reverse-skills --all
 ```
 
-2. Install the Plugin
+### Update & Remove
 
 ```bash
-/plugin install reverse-engineering@reverse-engineering-skills
+# Check for updates
+npx skills check
+
+# Update
+npx skills update
+
+# Remove
+npx skills remove rev-symbol rev-struct
 ```
-
-### Cursor
-
-1. Download source code on github code page.
-
-2. unzip the source code and locate the `reverse-engineering` folder. Put it into `C:\User\<username>\.cursor` (`<username>` is the local user's account name). Then delete the  `.claude-plugin` folder inside of it.
-
-the final folder structure is:
-
-```
-.
-├── reverse-engineering
-│   └── skills
-│       ├── rev-struct
-│       │   └── SKILL.md
-│       └── rev-symbol
-│           └── SKILL.md
-```
-
-4. restart the cursor.
-
 
 ## Usage
 
 ### Analyze a Symbol
 
 ```
-/reverse-engineering:rev-symbol sub_401000
+/rev-symbol sub_401000
 ```
 
 ### Reconstruct a Structure
 
 ```
-/reverse-engineering:rev-struct sub_401000
+/rev-struct sub_401000
 ```
 
 ## Directory Structure
 
 ```
 reverse-skills/
-├── .claude-plugin/
-│   └── marketplace.json          # Marketplace catalog
-├── plugins/
-│   └── reverse-engineering/
-│       ├── .claude-plugin/
-│       │   └── plugin.json       # Plugin manifest
-│       └── skills/
-│           ├── rev-symbol/
-│           │   └── SKILL.md      # Symbol analysis skill
-│           └── rev-struct/
-│               └── SKILL.md      # Structure reconstruction skill
-└── README.md
+├── skills/
+│   ├── rev-symbol/
+│   │   └── SKILL.md      # Symbol analysis skill
+│   └── rev-struct/
+│       └── SKILL.md       # Structure reconstruction skill
+├── README.md
+└── README_EN.md
 ```
-
-## Development
-
-### Validate the Marketplace
-
-```bash
-claude plugin validate .
-```
-
-Or within Claude Code:
-
-```
-/plugin validate .
-```
-
-### Test Locally
-
-```bash
-/plugin marketplace add ./reverse-skills
-/plugin install reverse-engineering@reverse-engineering-skills
-```
-
-## Adding More Skills
-
-1. Create a new directory under `plugins/reverse-engineering/skills/`
-2. Add a `SKILL.md` file with the skill definition
-3. Update version in `plugin.json` if needed
 
 ## License
 

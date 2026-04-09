@@ -2,14 +2,14 @@
 
 # 逆向工程技能集 (Reverse Engineering Skills)
 
-为 Claude Code 提供逆向工程分析技能的插件市场。
+逆向工程分析技能，支持 40+ 种 AI 编程工具。
 
-**专为 [IDA-NO-MCP](https://github.com/P4nda0s/IDA-NO-MCP) 设计** - 从 IDA 导出反编译结果，然后使用 Claude Code 进行分析。
+**专为 [IDA-NO-MCP](https://github.com/P4nda0s/IDA-NO-MCP) 设计** - 从 IDA 导出反编译结果，然后使用 AI 编程工具进行分析。
 
 ## 工作流程
 
 1. **从 IDA 导出** - 使用 [IDA-NO-MCP](https://github.com/P4nda0s/IDA-NO-MCP) 插件 (`Ctrl-Shift-E`)
-2. **打开导出目录** - 使用 Claude Code 打开
+2. **打开导出目录** - 使用 AI 编程工具打开
 3. **使用技能分析** - 分析符号和数据结构
 
 ### 导出目录结构 (由 IDA-NO-MCP 生成)
@@ -28,65 +28,79 @@ export_dir/
 └── memory/                 # 内存十六进制转储 (1MB 分块)
 ```
 
-
 ## 包含的技能
 
 | 技能 | 描述 |
 |------|------|
-| `/reverse-engineering:rev-symbol` | 从导出表/导入表或反编译代码分析函数符号 |
-| `/reverse-engineering:rev-struct` | 从反编译函数重建数据结构 |
+| `rev-symbol` | 从导出表/导入表或反编译代码分析函数符号 |
+| `rev-struct` | 从反编译函数重建数据结构 |
+| `rev-frida` | 使用现代 Frida API 生成动态插桩脚本 |
 
 ## 安装
 
-### Claude
+```bash
+npx skills add P4nda0s/reverse-skills
+```
 
-1. 添加插件市场
+### 安装选项
 
 ```bash
-# 从 GitHub 添加
-/plugin marketplace add P4nda0s/reverse-skills
+# 列出可用技能
+npx skills add P4nda0s/reverse-skills --list
+
+# 安装到全局（所有项目可用）
+npx skills add P4nda0s/reverse-skills -g
+
+# 安装到指定 agent
+npx skills add P4nda0s/reverse-skills -a claude-code
+npx skills add P4nda0s/reverse-skills -a cursor
+
+# 安装指定技能
+npx skills add P4nda0s/reverse-skills --skill rev-symbol
+
+# 安装到所有 agent
+npx skills add P4nda0s/reverse-skills --all
 ```
 
-2. 安装插件
+### 更新与卸载
 
 ```bash
-/plugin install reverse-engineering@reverse-engineering-skills
+# 检查更新
+npx skills check
+
+# 更新
+npx skills update
+
+# 卸载
+npx skills remove rev-symbol rev-struct
 ```
-
-### Cursor
-
-1. 点击GitHub 代码页面右上角的绿色按钮, 将本项目下载为压缩包格式
-
-2. 解压压缩包中的plugin文件夹, 将其中的 `reverse-engineering` 文件夹整个放入 `C:\User\<username>\.cursor` ( `<username>` 为本机用户名), 并删除其中的 `.claude-plugin` 文件夹
-
-   完成后的目录结构为
-```
-.
-├── reverse-engineering
-│   └── skills
-│       ├── rev-struct
-│       │   └── SKILL.md
-│       └── rev-symbol
-│           └── SKILL.md
-```
-
-4. 重启cursor
-
 
 ## 使用方法
 
 ### 分析符号
 
 ```
-/reverse-engineering:rev-symbol sub_401000
+/rev-symbol sub_401000
 ```
 
 ### 重建数据结构
 
 ```
-/reverse-engineering:rev-struct sub_401000
+/rev-struct sub_401000
 ```
 
+## 目录结构
+
+```
+reverse-skills/
+├── skills/
+│   ├── rev-symbol/
+│   │   └── SKILL.md      # 符号分析技能
+│   └── rev-struct/
+│       └── SKILL.md       # 结构重建技能
+├── README.md
+└── README_EN.md
+```
 
 ## 许可证
 
