@@ -189,17 +189,3 @@ struct suggested_name {
 // 0x401000: *(this + 0x08) += 1;     // refcount++
 // 0x401100: printf("%s", *(this + 0x10));  // print name
 ```
-
----
-
-## Usage Examples
-
-```
-/reverse-engineering:rev-struct 0x401000
-```
-
-Or specify the parameter to analyze:
-
-```
-/reverse-engineering:rev-struct 0x401000 a1
-```

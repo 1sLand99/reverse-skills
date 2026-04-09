@@ -200,17 +200,3 @@ Based on collected information:
 ### Similar Open Source Implementation
 - <if similar open source code is found, provide link>
 ```
-
----
-
-## Usage Examples
-
-```
-/reverse-engineering:rev-symbol 0x401000
-```
-
-or
-
-```
-/reverse-engineering:rev-symbol sub_401234
-```
