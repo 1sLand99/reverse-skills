@@ -38,18 +38,40 @@ export_dir/
 
 ## 安装
 
-### 添加插件市场
+### Claude
+
+1. 添加插件市场
 
 ```bash
 # 从 GitHub 添加
 /plugin marketplace add P4nda0s/reverse-skills
 ```
 
-### 安装插件
+2. 安装插件
 
 ```bash
 /plugin install reverse-engineering@reverse-engineering-skills
 ```
+
+### Cursor
+
+1. 点击GitHub 代码页面右上角的绿色按钮, 将本项目下载为压缩包格式
+
+2. 解压压缩包中的plugin文件夹, 将其中的 `reverse-engineering` 文件夹整个放入 `C:\User\<username>\.cursor` ( `<username>` 为本机用户名), 并删除其中的 `.claude-plugin` 文件夹
+
+   完成后的目录结构为
+```
+.
+├── reverse-engineering
+│   └── skills
+│       ├── rev-struct
+│       │   └── SKILL.md
+│       └── rev-symbol
+│           └── SKILL.md
+```
+
+4. 重启cursor
+
 
 ## 使用方法
 
